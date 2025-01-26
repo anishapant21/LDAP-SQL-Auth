@@ -40,14 +40,14 @@ RUN useradd -m -s /bin/bash mie && \
     echo 'mie ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers.d/mie
 
 # LDAP Configuration
-COPY users.ldif /etc/ldap/users.ldif
-COPY setup.ldif /etc/ldap/setup.ldif
+# COPY users.ldif /etc/ldap/users.ldif
+# COPY setup.ldif /etc/ldap/setup.ldif
 
 # COPY certificates/ /certificates/
 
 # Configure LDAP client
 RUN echo "BASE    dc=mieweb,dc=com" > /etc/ldap/ldap.conf && \
-    echo "URI     ldap://app:389" >> /etc/ldap/ldap.conf && \
+    echo "URI     ldap://host.docker.internal:389" >> /etc/ldap/ldap.conf && \
     echo "BINDDN  dc=mieweb,dc=com" >> /etc/ldap/ldap.conf && \
     echo "TLS_REQCERT allow" >> /etc/ldap/ldap.conf
 
